@@ -8,6 +8,7 @@ public class Kandidat {
 	private int brojBodovaIzSkole;
 	private int brojBodovaNaPrijemnom;
 	
+	
 	public String getIme() {
 		return ime;
 	}
@@ -48,6 +49,9 @@ public class Kandidat {
 		this.brojBodovaNaPrijemnom = brojBodovaNaPrijemnom;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "Ime: " +getIme() + " Prezime " + getPrezime() + " UKUPAN BROJ BODOVA: " +(getBrojBodovaIzSkole()+getBrojBodovaNaPrijemnom()); 
+	}
 	
 }
