@@ -1,12 +1,22 @@
 package prijemni;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.swing.JFileChooser;
+
+import prijemni.sistemsekoperacije.SOSerijalizacija;
+
 public class Kandidat {
 
 	private String ime;
 	private String prezime;
 	private String maticniBroj;
-	private int brojBodovaIzSkole;
-	private int brojBodovaNaPrijemnom;
+	private double brojBodovaIzSkole;
+	private double brojBodovaNaPrijemnom;
 
 	public String getIme() {
 		return ime;
@@ -32,26 +42,35 @@ public class Kandidat {
 		this.maticniBroj = maticniBroj;
 	}
 
-	public int getBrojBodovaIzSkole() {
+	public double getBrojBodovaIzSkole() {
 		return brojBodovaIzSkole;
 	}
 
-	public void setBrojBodovaIzSkole(int brojBodovaIzSkole) {
-		this.brojBodovaIzSkole = brojBodovaIzSkole;
+	public void setBrojBodovaIzSkole(double d) {
+		this.brojBodovaIzSkole = d;
 	}
 
-	public int getBrojBodovaNaPrijemnom() {
+	public double getBrojBodovaNaPrijemnom() {
 		return brojBodovaNaPrijemnom;
 	}
 
-	public void setBrojBodovaNaPrijemnom(int brojBodovaNaPrijemnom) {
-		this.brojBodovaNaPrijemnom = brojBodovaNaPrijemnom;
+	public void setBrojBodovaNaPrijemnom(double bodovi) {
+		this.brojBodovaNaPrijemnom = bodovi;
 	}
 
-	@Override
+	
 	public String toString() {
 		return "Ime: " + getIme() + " Prezime " + getPrezime() + " UKUPAN BROJ BODOVA: "
 				+ (getBrojBodovaIzSkole() + getBrojBodovaNaPrijemnom());
 	}
 
+	public void serijalizacija(Kandidat k){
+		
+		SOSerijalizacija.izvrsi(k);
+			
+	}
+		
+	
+	
+	
 }

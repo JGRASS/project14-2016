@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import prijemni.Kandidat;
 import prijemni.gui.GUIKontroler;
 
 import javax.swing.JTextField;
@@ -182,6 +183,7 @@ public class PrijemniGUI extends JFrame {
 	public JButton getBtnSacuvaj() {
 		if (btnSacuvaj == null) {
 			btnSacuvaj = new JButton("Sacuvaj");
+			btnSacuvaj.setVisible(false);
 			btnSacuvaj.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					btnUcitajKandidata.setVisible(false);
@@ -198,6 +200,9 @@ public class PrijemniGUI extends JFrame {
 						}
 					}
 					textAreaPitanja.setText("Pocnite unos sledeceg kandidata...");
+					
+					GUIKontroler.unesi();
+					
 					bodovi = 0;
 				}
 			});
@@ -382,7 +387,6 @@ public class PrijemniGUI extends JFrame {
 			btnSledeciOdgovor.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					if (i < 19) {
-						textAreaPitanja.setText("Odgovor na " + (i + 2) + ". pitanje je?");
 						if (rdbtnA.isSelected()) {
 							nizResenjaKandidata[i] = "A";
 						} else if (rdbtnB.isSelected()) {
@@ -399,6 +403,7 @@ public class PrijemniGUI extends JFrame {
 							i--;
 						}
 						i++;
+						textAreaPitanja.setText("Odgovor na " + (i + 1) + ". pitanje je?");
 						// buttonGroup.clearSelection();
 					} else {
 						if (rdbtnA.isSelected()) {
@@ -418,7 +423,6 @@ public class PrijemniGUI extends JFrame {
 						}
 						btnSledeciOdgovor.setVisible(false);
 						btnUcitajKandidata.setVisible(true);
-						btnSacuvaj.setVisible(true);
 						rdbtnA.setVisible(false);
 						rdbtnB.setVisible(false);
 						rdbtnC.setVisible(false);

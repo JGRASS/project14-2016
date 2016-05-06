@@ -5,10 +5,13 @@ import java.awt.HeadlessException;
 
 import javax.swing.JOptionPane;
 
+import prijemni.Kandidat;
+
 public class GUIKontroler {
 
 	private static PrijemniGUI prijemni;
 	private static KandidatGUI kandidat;
+	private static Kandidat k;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -95,5 +98,18 @@ public class GUIKontroler {
 		
 		
 	}
+	
+	public static void unesi(){
+		
+		k = new Kandidat();
+		
+		k.setIme(prijemni.getTextFieldIme().getText());
+		k.setPrezime(prijemni.getTextFieldPrezime().getText());
+		k.setMaticniBroj(prijemni.getTextFieldMaticniBroj().getText());
+		k.setBrojBodovaIzSkole(Double.parseDouble(prijemni.getTextFieldBodoviIzSkole().getText()));
+		k.setBrojBodovaNaPrijemnom(prijemni.bodovi);
+		k.serijalizacija(k);
+	}
+	
 
 }
