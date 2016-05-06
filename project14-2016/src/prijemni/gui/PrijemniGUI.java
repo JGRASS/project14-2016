@@ -159,6 +159,7 @@ public class PrijemniGUI extends JFrame {
 	private JButton getBtnPocetak() {
 		if (btnPocetak == null) {
 			btnPocetak = new JButton("Kreni");
+			btnPocetak.setVisible(false);
 			btnPocetak.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					btnPocetak.setVisible(false);
@@ -181,9 +182,9 @@ public class PrijemniGUI extends JFrame {
 	private JButton getBtnSacuvaj() {
 		if (btnSacuvaj == null) {
 			btnSacuvaj = new JButton("Sacuvaj");
-			btnSacuvaj.setVisible(false);
 			btnSacuvaj.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					btnUcitajKandidata.setVisible(false);
 					btnPocetak.setVisible(true);
 					btnSacuvaj.setVisible(false);
 					i = 0;
@@ -196,7 +197,7 @@ public class PrijemniGUI extends JFrame {
 							bodovi = bodovi - 0.6;
 						}
 					}
-					textAreaPitanja.setText("Broj bodova: " + bodovi);
+					textAreaPitanja.setText("Pocnite unos sledeceg kandidata...");
 					bodovi = 0;
 				}
 			});
@@ -334,6 +335,7 @@ public class PrijemniGUI extends JFrame {
 						if (opcija == JFileChooser.APPROVE_OPTION) {
 							File file = fc.getSelectedFile();
 							textAreaPitanja.setText("Ucitana su resenja sa lokacije: " + file.getAbsolutePath());
+							btnPocetak.setVisible(true);
 							BufferedReader br = new BufferedReader(new FileReader(file));
 							for (int i = 0; i < nizResenja.length; i++) {
 								nizResenja[i] = br.readLine();
@@ -360,6 +362,7 @@ public class PrijemniGUI extends JFrame {
 	private JButton getBtnUcitajKandidata() {
 		if (btnUcitajKandidata == null) {
 			btnUcitajKandidata = new JButton("Ucitaj kandidata");
+			btnUcitajKandidata.setVisible(false);
 			btnUcitajKandidata.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					GUIKontroler.prikaziProzorKandidat();
@@ -414,6 +417,7 @@ public class PrijemniGUI extends JFrame {
 							i--;
 						}
 						btnSledeciOdgovor.setVisible(false);
+						btnUcitajKandidata.setVisible(true);
 						btnSacuvaj.setVisible(true);
 						rdbtnA.setVisible(false);
 						rdbtnB.setVisible(false);
