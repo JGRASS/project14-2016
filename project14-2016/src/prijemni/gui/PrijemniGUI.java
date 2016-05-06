@@ -178,7 +178,7 @@ public class PrijemniGUI extends JFrame {
 
 	double bodovi = 0;
 
-	private JButton getBtnSacuvaj() {
+	public JButton getBtnSacuvaj() {
 		if (btnSacuvaj == null) {
 			btnSacuvaj = new JButton("Sacuvaj");
 			btnSacuvaj.setVisible(false);

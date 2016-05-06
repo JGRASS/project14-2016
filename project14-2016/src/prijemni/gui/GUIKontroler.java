@@ -73,6 +73,8 @@ public class GUIKontroler {
 					kandidat.getTextFieldMaticniBroj().setText(null);
 					kandidat.getTextFieldBodovi().setText(null);
 					kandidat.dispose();
+					
+					prijemni.getBtnSacuvaj().setVisible(true);
 				}
 			} else {
 				if (maticniBroj.length() != 13) {
@@ -90,6 +92,8 @@ public class GUIKontroler {
 					"Doslo je do greske prilikom unosa; unesite ponovo!", "Greska", JOptionPane.ERROR_MESSAGE);
 		}
 
+		
+		
 	}
 
 }
