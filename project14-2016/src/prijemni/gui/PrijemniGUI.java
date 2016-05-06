@@ -8,15 +8,26 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import java.awt.FlowLayout;
+import java.awt.HeadlessException;
+
 import javax.swing.JTextPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
+
 import java.awt.Dimension;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JRadioButton;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.ButtonGroup;
 
@@ -46,6 +57,7 @@ public class PrijemniGUI extends JFrame {
 	private JTextField textFieldBodoviIzSkole;
 	private JButton btnUcitajResenja;
 	private JButton btnUcitajKandidata;
+	private JButton btnSledeciOdgovor;
 
 	/**
 	 * Launch the application.
@@ -103,6 +115,7 @@ public class PrijemniGUI extends JFrame {
 			panel_1.add(getTextFieldMaticniBroj(), "cell 0 7,growx");
 			panel_1.add(getLabel_4(), "cell 0 8");
 			panel_1.add(getTextFieldBodoviIzSkole(), "cell 0 9,growx");
+			panel_1.add(getLblBodovi(), "cell 0 10");
 		}
 		return panel_1;
 	}
@@ -111,7 +124,8 @@ public class PrijemniGUI extends JFrame {
 			panel_2 = new JPanel();
 			panel_2.setPreferredSize(new Dimension(10, 50));
 			panel_2.setLayout(new MigLayout("", "[79px][65px][71px][][][][][][][][][][][][][][][][][][][][][][][][][][][][]", "[23px]"));
-			panel_2.add(getBtnPocetak(), "cell 0 0,alignx left,aligny center");
+			panel_2.add(getBtnPocetak(), "cell 0 0,growx,aligny center");
+			panel_2.add(getBtnSledeciOdgovor(), "cell 1 0,growx");
 			panel_2.add(getRdbtnA(), "cell 3 0");
 			panel_2.add(getRdbtnB(), "cell 4 0");
 			panel_2.add(getRdbtnC(), "cell 5 0");
@@ -137,24 +151,59 @@ public class PrijemniGUI extends JFrame {
 	}
 	private JButton getBtnPocetak() {
 		if (btnPocetak == null) {
-			btnPocetak = new JButton("Idi na pocetak");
+			btnPocetak = new JButton("Kreni");
+			btnPocetak.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					btnPocetak.setVisible(false);
+					textAreaPitanja.setText("Odgovor na 1. pitanje je?");
+					btnSledeciOdgovor.setVisible(true);
+					rdbtnA.setVisible(true);
+					rdbtnB.setVisible(true);
+					rdbtnC.setVisible(true);
+					rdbtnD.setVisible(true);
+					rdbtnN.setVisible(true);
+
+				}
+			});
 		}
 		return btnPocetak;
 	}
+	double bodovi = 0;
 	private JButton getBtnSacuvaj() {
 		if (btnSacuvaj == null) {
 			btnSacuvaj = new JButton("Sacuvaj");
+			btnSacuvaj.setVisible(false);
+			btnSacuvaj.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					btnPocetak.setVisible(true);
+					btnSacuvaj.setVisible(false);
+					i=0;
+					for (int j = 0; j < 20; j++) {
+						if(nizResenjaKandidata[j]=="N"){
+							bodovi+=0;
+						}
+						else if(nizResenjaKandidata[j].equals(nizResenja[j])){
+							bodovi+=3;
+						}else{
+							bodovi=bodovi-0.6;
+						}
+					}
+					textAreaPitanja.setText("Broj bodova: " +bodovi);
+					bodovi=0;
+				}
+			});
 		}
 		return btnSacuvaj;
 	}
 	private JRadioButton getRdbtnA() {
 		if (rdbtnA == null) {
 			rdbtnA = new JRadioButton("A");
+			rdbtnA.setVisible(false);
 			buttonGroup.add(rdbtnA);
 			rdbtnA.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					if(rdbtnA.isSelected()){
-						
+
 					}
 				}
 			});
@@ -164,6 +213,7 @@ public class PrijemniGUI extends JFrame {
 	private JRadioButton getRdbtnB() {
 		if (rdbtnB == null) {
 			rdbtnB = new JRadioButton("B");
+			rdbtnB.setVisible(false);
 			buttonGroup.add(rdbtnB);
 		}
 		return rdbtnB;
@@ -171,6 +221,7 @@ public class PrijemniGUI extends JFrame {
 	private JRadioButton getRdbtnC() {
 		if (rdbtnC == null) {
 			rdbtnC = new JRadioButton("C");
+			rdbtnC.setVisible(false);
 			buttonGroup.add(rdbtnC);
 		}
 		return rdbtnC;
@@ -178,6 +229,7 @@ public class PrijemniGUI extends JFrame {
 	private JRadioButton getRdbtnD() {
 		if (rdbtnD == null) {
 			rdbtnD = new JRadioButton("D");
+			rdbtnD.setVisible(false);
 			buttonGroup.add(rdbtnD);
 		}
 		return rdbtnD;
@@ -185,6 +237,7 @@ public class PrijemniGUI extends JFrame {
 	private JRadioButton getRdbtnN() {
 		if (rdbtnN == null) {
 			rdbtnN = new JRadioButton("N");
+			rdbtnN.setVisible(false);
 			buttonGroup.add(rdbtnN);
 		}
 		return rdbtnN;
@@ -245,9 +298,39 @@ public class PrijemniGUI extends JFrame {
 		}
 		return textFieldBodoviIzSkole;
 	}
+	String[] nizResenja = new String[20];
 	private JButton getBtnUcitajResenja() {
 		if (btnUcitajResenja == null) {
 			btnUcitajResenja = new JButton("Ucitaj resenja");
+			btnUcitajResenja.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					try {
+						JFileChooser fc = new JFileChooser();
+						int opcija = fc.showOpenDialog(null);
+						textAreaPitanja.setText("Ucitana su resenja sa lokacije: " );
+						if(opcija == JFileChooser.APPROVE_OPTION) {
+							File file = fc.getSelectedFile();
+							textAreaPitanja.setText("Ucitana su resenja sa lokacije: " +file.getAbsolutePath());
+							BufferedReader br = new BufferedReader(new FileReader(file));
+							for (int i = 0; i < nizResenja.length; i++) {
+								nizResenja[i]=br.readLine();
+							}
+
+
+						}
+					} catch (HeadlessException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (FileNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+				}
+			});
 		}
 		return btnUcitajResenja;
 	}
@@ -256,5 +339,80 @@ public class PrijemniGUI extends JFrame {
 			btnUcitajKandidata = new JButton("Ucitaj kandidata");
 		}
 		return btnUcitajKandidata;
+	}
+	int i = 0;
+	String[] nizResenjaKandidata = new String[20];
+	private JLabel lblBodovi;
+	private JButton getBtnSledeciOdgovor() {
+		if (btnSledeciOdgovor == null) {
+			btnSledeciOdgovor = new JButton("Sledeci odgovor");
+			btnSledeciOdgovor.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					if(i<19){
+						textAreaPitanja.setText("Odgovor na "+(i+2)+". pitanje je?");
+						if(rdbtnA.isSelected()){
+							nizResenjaKandidata[i]="A";
+						}
+						else if(rdbtnB.isSelected()){
+							nizResenjaKandidata[i]="B";
+						}
+						else if(rdbtnC.isSelected()){
+							nizResenjaKandidata[i]="C";
+						}
+						else if(rdbtnD.isSelected()){
+							nizResenjaKandidata[i]="D";
+						}
+						else if(rdbtnN.isSelected()){
+							nizResenjaKandidata[i]="N";
+						}
+						else{
+							JOptionPane.showMessageDialog(null, "Morate odabrati odgovor!", "Greska", JOptionPane.OK_OPTION);
+							i--;
+						}
+						i++;
+//						buttonGroup.clearSelection();
+					}
+					else{
+						if(rdbtnA.isSelected()){
+							nizResenjaKandidata[i]="A";
+						}
+						else if(rdbtnB.isSelected()){
+							nizResenjaKandidata[i]="B";
+						}
+						else if(rdbtnC.isSelected()){
+							nizResenjaKandidata[i]="C";
+						}
+						else if(rdbtnD.isSelected()){
+							nizResenjaKandidata[i]="D";
+						}
+						else if(rdbtnN.isSelected()){
+							nizResenjaKandidata[i]="N";
+						}
+						else{
+							JOptionPane.showMessageDialog(null, "Morate odabrati odgovor!", "Greska", JOptionPane.OK_OPTION);
+							i--;
+						}
+						btnSledeciOdgovor.setVisible(false);
+						btnSacuvaj.setVisible(true);
+						rdbtnA.setVisible(false);
+						rdbtnB.setVisible(false);
+						rdbtnC.setVisible(false);
+						rdbtnD.setVisible(false);
+						rdbtnN.setVisible(false);
+						textAreaPitanja.setText("Uneti su svi odgovori, sad mozete da ih sacuvate!");
+
+					}
+				}
+			});
+			btnSledeciOdgovor.setVisible(false);
+		}
+		return btnSledeciOdgovor;
+	}
+	private JLabel getLblBodovi() {
+		if (lblBodovi == null) {
+			lblBodovi = new JLabel("");
+			lblBodovi.setVisible(false);
+		}
+		return lblBodovi;
 	}
 }

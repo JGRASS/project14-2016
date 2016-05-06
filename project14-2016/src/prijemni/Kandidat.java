@@ -1,8 +1,7 @@
 package prijemni;
 
 public class Kandidat {
-<<<<<<< HEAD
-=======
+
 
 	private String ime;
 	private String prezime;
@@ -55,6 +54,6 @@ public class Kandidat {
 	public String toString() {
 		return "Ime: " +getIme() + " Prezime " + getPrezime() + " UKUPAN BROJ BODOVA: " +(getBrojBodovaIzSkole()+getBrojBodovaNaPrijemnom()); 
 	}
->>>>>>> refs/remotes/origin/valentina
+
 	
 }

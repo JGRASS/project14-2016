@@ -27,21 +27,7 @@ public class KandidatGUI extends JFrame {
 	private JTextField textFieldBodovi;
 	private JButton btnUcitajPodatke;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					KandidatGUI frame = new KandidatGUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the frame.
