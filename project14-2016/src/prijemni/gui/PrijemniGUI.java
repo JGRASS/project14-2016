@@ -149,7 +149,7 @@ public class PrijemniGUI extends JFrame {
 		return scrollPane;
 	}
 
-	private JTextArea getTextAreaPitanja() {
+	public JTextArea getTextAreaPitanja() {
 		if (textAreaPitanja == null) {
 			textAreaPitanja = new JTextArea();
 			textAreaPitanja.setEditable(false);
@@ -189,6 +189,7 @@ public class PrijemniGUI extends JFrame {
 					btnUcitajKandidata.setVisible(false);
 					btnPocetak.setVisible(true);
 					btnSacuvaj.setVisible(false);
+
 					i = 0;
 					for (int j = 0; j < 20; j++) {
 						if (nizResenjaKandidata[j] == "N") {
@@ -200,10 +201,18 @@ public class PrijemniGUI extends JFrame {
 						}
 					}
 					textAreaPitanja.setText("Pocnite unos sledeceg kandidata...");
-					
+
 					GUIKontroler.unesi();
-					
+
+					String poruka = "Ime: " + textFieldIme.getText() + "\nPrezime: " + textFieldPrezime.getText()
+							+ "\nBroj bodova na prijemnom: " + bodovi;
+					JOptionPane.showMessageDialog(null, poruka, "Kandidat je unet uspesno", JOptionPane.OK_OPTION);
+					textFieldBodoviIzSkole.setText(null);
+					textFieldIme.setText(null);
+					textFieldMaticniBroj.setText(null);
+					textFieldPrezime.setText(null);
 					bodovi = 0;
+
 				}
 			});
 		}
@@ -428,7 +437,7 @@ public class PrijemniGUI extends JFrame {
 						rdbtnC.setVisible(false);
 						rdbtnD.setVisible(false);
 						rdbtnN.setVisible(false);
-						textAreaPitanja.setText("Uneti su svi odgovori, sad mozete da ih sacuvate!");
+						textAreaPitanja.setText("Uneti su svi odgovori, sad mozete da unesete kandidata!");
 
 					}
 				}

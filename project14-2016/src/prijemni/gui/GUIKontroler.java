@@ -75,6 +75,7 @@ public class GUIKontroler {
 					kandidat.getTextFieldPrezime().setText(null);
 					kandidat.getTextFieldMaticniBroj().setText(null);
 					kandidat.getTextFieldBodovi().setText(null);
+					prijemni.getTextAreaPitanja().setText("Uneti su svi odgovori, sad mozete da ih sacuvate!");
 					kandidat.dispose();
 					
 					prijemni.getBtnSacuvaj().setVisible(true);
