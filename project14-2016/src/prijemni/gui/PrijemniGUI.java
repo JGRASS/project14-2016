@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import prijemni.gui.GUIKontroler;
+
 import javax.swing.JTextField;
 import java.awt.FlowLayout;
 import javax.swing.JTextPane;
@@ -17,6 +20,8 @@ import javax.swing.JLabel;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JRadioButton;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.ButtonGroup;
 
@@ -47,26 +52,22 @@ public class PrijemniGUI extends JFrame {
 	private JButton btnUcitajResenja;
 	private JButton btnUcitajKandidata;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PrijemniGUI frame = new PrijemniGUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the frame.
 	 */
 	public PrijemniGUI() {
+		
+			addWindowListener(new WindowAdapter() {
+				@Override
+				public void windowClosing(WindowEvent e) {
+					GUIKontroler.ugasiAplikaciju();
+				}
+			});
+		
+		
+		
 		setTitle("Rezultati prijemnog");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -213,7 +214,7 @@ public class PrijemniGUI extends JFrame {
 		}
 		return lblBodoviIzSkole;
 	}
-	private JTextField getTextFieldIme() {
+	public JTextField getTextFieldIme() {
 		if (textFieldIme == null) {
 			textFieldIme = new JTextField();
 			textFieldIme.setEditable(false);
@@ -221,7 +222,7 @@ public class PrijemniGUI extends JFrame {
 		}
 		return textFieldIme;
 	}
-	private JTextField getTextFieldPrezime() {
+	public JTextField getTextFieldPrezime() {
 		if (textFieldPrezime == null) {
 			textFieldPrezime = new JTextField();
 			textFieldPrezime.setEditable(false);
@@ -229,7 +230,7 @@ public class PrijemniGUI extends JFrame {
 		}
 		return textFieldPrezime;
 	}
-	private JTextField getTextFieldMaticniBroj() {
+	public JTextField getTextFieldMaticniBroj() {
 		if (textFieldMaticniBroj == null) {
 			textFieldMaticniBroj = new JTextField();
 			textFieldMaticniBroj.setEditable(false);
@@ -237,7 +238,7 @@ public class PrijemniGUI extends JFrame {
 		}
 		return textFieldMaticniBroj;
 	}
-	private JTextField getTextFieldBodoviIzSkole() {
+	public JTextField getTextFieldBodoviIzSkole() {
 		if (textFieldBodoviIzSkole == null) {
 			textFieldBodoviIzSkole = new JTextField();
 			textFieldBodoviIzSkole.setEditable(false);
@@ -254,6 +255,11 @@ public class PrijemniGUI extends JFrame {
 	private JButton getBtnUcitajKandidata() {
 		if (btnUcitajKandidata == null) {
 			btnUcitajKandidata = new JButton("Ucitaj kandidata");
+			btnUcitajKandidata.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					GUIKontroler.prikaziProzorKandidat();
+				}
+			});
 		}
 		return btnUcitajKandidata;
 	}

@@ -1,6 +1,5 @@
 package prijemni.gui;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -8,7 +7,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.JSeparator;
 import java.awt.Dimension;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -27,21 +25,7 @@ public class KandidatGUI extends JFrame {
 	private JTextField textFieldBodovi;
 	private JButton btnUcitajPodatke;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					KandidatGUI frame = new KandidatGUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the frame.
@@ -49,7 +33,7 @@ public class KandidatGUI extends JFrame {
 	public KandidatGUI() {
 		setResizable(false);
 		setTitle("Kandidat");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 293, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -67,12 +51,12 @@ public class KandidatGUI extends JFrame {
 	}
 	private JLabel getLblImeKandidata() {
 		if (lblImeKandidata == null) {
-			lblImeKandidata = new JLabel("Ime kandidata:");
+			lblImeKandidata = new JLabel("Ime:");
 			lblImeKandidata.setBounds(23, 38, 104, 14);
 		}
 		return lblImeKandidata;
 	}
-	private JTextField getTextFieldIme() {
+	public JTextField getTextFieldIme() {
 		if (textFieldIme == null) {
 			textFieldIme = new JTextField();
 			textFieldIme.setPreferredSize(new Dimension(21, 20));
@@ -83,12 +67,12 @@ public class KandidatGUI extends JFrame {
 	}
 	private JLabel getLblPrezimeKandidata() {
 		if (lblPrezimeKandidata == null) {
-			lblPrezimeKandidata = new JLabel("Prezime kandidata:");
+			lblPrezimeKandidata = new JLabel("Prezime:");
 			lblPrezimeKandidata.setBounds(23, 86, 104, 14);
 		}
 		return lblPrezimeKandidata;
 	}
-	private JTextField getTextFieldPrezime() {
+	public JTextField getTextFieldPrezime() {
 		if (textFieldPrezime == null) {
 			textFieldPrezime = new JTextField();
 			textFieldPrezime.setBounds(158, 83, 86, 20);
@@ -103,7 +87,7 @@ public class KandidatGUI extends JFrame {
 		}
 		return lblMaticniBroj;
 	}
-	private JTextField getTextFieldMaticniBroj() {
+	public JTextField getTextFieldMaticniBroj() {
 		if (textFieldMaticniBroj == null) {
 			textFieldMaticniBroj = new JTextField();
 			textFieldMaticniBroj.setBounds(158, 133, 86, 20);
@@ -113,12 +97,12 @@ public class KandidatGUI extends JFrame {
 	}
 	private JLabel getLblBrojBodovaIz() {
 		if (lblBrojBodovaIz == null) {
-			lblBrojBodovaIz = new JLabel("Broj bodova iz skole:");
+			lblBrojBodovaIz = new JLabel("Bodovi iz skole:");
 			lblBrojBodovaIz.setBounds(23, 185, 104, 14);
 		}
 		return lblBrojBodovaIz;
 	}
-	private JTextField getTextFieldBodovi() {
+	public JTextField getTextFieldBodovi() {
 		if (textFieldBodovi == null) {
 			textFieldBodovi = new JTextField();
 			textFieldBodovi.setBounds(158, 182, 86, 20);
@@ -130,7 +114,8 @@ public class KandidatGUI extends JFrame {
 		if (btnUcitajPodatke == null) {
 			btnUcitajPodatke = new JButton("Sacuvaj");
 			btnUcitajPodatke.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
+				public void actionPerformed(ActionEvent e) {
+					GUIKontroler.sacuvajPodatkeOKandidatu();
 				}
 			});
 			btnUcitajPodatke.setBounds(85, 227, 104, 23);
