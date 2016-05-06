@@ -1,6 +1,7 @@
 package prijemni.gui;
 
 import java.awt.EventQueue;
+import java.awt.HeadlessException;
 
 import javax.swing.JOptionPane;
 
@@ -46,23 +47,54 @@ public class GUIKontroler {
 	
 	public static void sacuvajPodatkeOKandidatu(){
 		
-		String ime;
-		ime = kandidat.getTextFieldIme().getText();
-		prijemni.getTextFieldIme().setText(ime);
+		try {
+			String ime;
+			ime = kandidat.getTextFieldIme().getText();
+			
+			String prezime;
+			prezime = kandidat.getTextFieldPrezime().getText();
+			
+			String maticniBroj;
+			maticniBroj = kandidat.getTextFieldMaticniBroj().getText();
+			
+			String bodoviIzSkole;
+			bodoviIzSkole = kandidat.getTextFieldBodovi().getText();
+			Double bodovi = Double.parseDouble(bodoviIzSkole);
+			
+			if(maticniBroj.length() == 13 && bodovi>=12 && bodovi<=40){
+				prijemni.getTextFieldPrezime().setText(prezime);
+				prijemni.getTextFieldMaticniBroj().setText(maticniBroj);;
+				prijemni.getTextFieldIme().setText(ime);
+				prijemni.getTextFieldBodoviIzSkole().setText(bodoviIzSkole);
+				
+				if(prijemni.getTextFieldIme()!=null && prijemni.getTextFieldPrezime()!=null && prijemni.getTextFieldMaticniBroj()!=null
+						&& prijemni.getTextFieldBodoviIzSkole()!=null){
+					kandidat.getTextFieldIme().setText(null);
+					kandidat.getTextFieldPrezime().setText(null);
+					kandidat.getTextFieldMaticniBroj().setText(null);
+					kandidat.getTextFieldBodovi().setText(null);
+					kandidat.dispose();
+				}
+			}else{
+				if(maticniBroj.length()!=13){
+					kandidat.getTextFieldMaticniBroj().setText(null);
+				}
+				if(bodovi<12 || bodovi >40){
+					kandidat.getTextFieldBodovi().setText(null);
+				}
+					JOptionPane.showMessageDialog(kandidat.getContentPane(), "Unesite ponovo pogresno uneti podatak!", "Greska",
+						JOptionPane.ERROR_MESSAGE);
+			}
+		} catch (Exception e) {
+			kandidat.getTextFieldBodovi().setText(null);
+			JOptionPane.showMessageDialog(kandidat.getContentPane(), "Doslo je do greske prilikom unosa; unesite ponovo!",
+					"Greska", JOptionPane.ERROR_MESSAGE);
+		} 
 		
-		String prezime;
-		prezime = kandidat.getTextFieldPrezime().getText();
-		prijemni.getTextFieldPrezime().setText(prezime);
+	
 		
-		String maticniBroj;
-		maticniBroj = kandidat.getTextFieldMaticniBroj().getText();
-		prijemni.getTextFieldMaticniBroj().setText(maticniBroj);;
 		
-		String bodoviIzSkole;
-		bodoviIzSkole = kandidat.getTextFieldBodovi().getText();
-		prijemni.getTextFieldBodoviIzSkole().setText(bodoviIzSkole);
 		
-		kandidat.dispose();
 	}
 	
 	

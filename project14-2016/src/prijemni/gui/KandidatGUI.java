@@ -59,8 +59,7 @@ public class KandidatGUI extends JFrame {
 	public JTextField getTextFieldIme() {
 		if (textFieldIme == null) {
 			textFieldIme = new JTextField();
-			textFieldIme.setPreferredSize(new Dimension(21, 20));
-			textFieldIme.setBounds(158, 35, 86, 20);
+			textFieldIme.setBounds(137, 35, 107, 20);
 			textFieldIme.setColumns(10);
 		}
 		return textFieldIme;
@@ -75,7 +74,7 @@ public class KandidatGUI extends JFrame {
 	public JTextField getTextFieldPrezime() {
 		if (textFieldPrezime == null) {
 			textFieldPrezime = new JTextField();
-			textFieldPrezime.setBounds(158, 83, 86, 20);
+			textFieldPrezime.setBounds(137, 83, 107, 20);
 			textFieldPrezime.setColumns(10);
 		}
 		return textFieldPrezime;
@@ -90,7 +89,7 @@ public class KandidatGUI extends JFrame {
 	public JTextField getTextFieldMaticniBroj() {
 		if (textFieldMaticniBroj == null) {
 			textFieldMaticniBroj = new JTextField();
-			textFieldMaticniBroj.setBounds(158, 133, 86, 20);
+			textFieldMaticniBroj.setBounds(137, 133, 107, 20);
 			textFieldMaticniBroj.setColumns(10);
 		}
 		return textFieldMaticniBroj;
@@ -105,7 +104,7 @@ public class KandidatGUI extends JFrame {
 	public JTextField getTextFieldBodovi() {
 		if (textFieldBodovi == null) {
 			textFieldBodovi = new JTextField();
-			textFieldBodovi.setBounds(158, 182, 86, 20);
+			textFieldBodovi.setBounds(137, 182, 107, 20);
 			textFieldBodovi.setColumns(10);
 		}
 		return textFieldBodovi;
