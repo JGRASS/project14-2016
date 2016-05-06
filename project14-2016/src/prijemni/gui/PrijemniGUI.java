@@ -18,6 +18,7 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.JRadioButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ButtonGroup;
 
 public class PrijemniGUI extends JFrame {
 
@@ -27,15 +28,6 @@ public class PrijemniGUI extends JFrame {
 	private JPanel panel_2;
 	private JScrollPane scrollPane;
 	private JTextArea textAreaPitanja;
-	private JButton btnUcitaj;
-	private JTextField txtIme;
-	private JLabel lblIme;
-	private JLabel lblPrezime;
-	private JTextField textPrezime;
-	private JLabel lblJmbg;
-	private JTextField txtJmbg;
-	private JLabel lblBrojBodova;
-	private JTextField textBodoviSS;
 	private JButton btnPocetak;
 	private JButton btnSacuvaj;
 	private JRadioButton rdbtnA;
@@ -43,6 +35,17 @@ public class PrijemniGUI extends JFrame {
 	private JRadioButton rdbtnC;
 	private JRadioButton rdbtnD;
 	private JRadioButton rdbtnN;
+	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private JLabel lblIme;
+	private JLabel lblPrezime;
+	private JLabel lblMaticniBroj;
+	private JLabel lblBodoviIzSkole;
+	private JTextField textFieldIme;
+	private JTextField textFieldPrezime;
+	private JTextField textFieldMaticniBroj;
+	private JTextField textFieldBodoviIzSkole;
+	private JButton btnUcitajResenja;
+	private JButton btnUcitajKandidata;
 
 	/**
 	 * Launch the application.
@@ -88,17 +91,18 @@ public class PrijemniGUI extends JFrame {
 	private JPanel getPanel_1() {
 		if (panel_1 == null) {
 			panel_1 = new JPanel();
-			panel_1.setPreferredSize(new Dimension(105, 10));
-			panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-			panel_1.add(getBtnUcitaj());
-			panel_1.add(getLblIme());
-			panel_1.add(getTxtIme());
-			panel_1.add(getLblPrezime());
-			panel_1.add(getTextPrezime());
-			panel_1.add(getLblJmbg());
-			panel_1.add(getTxtJmbg());
-			panel_1.add(getLblBrojBodova());
-			panel_1.add(getTextBodoviSS());
+			panel_1.setPreferredSize(new Dimension(150, 10));
+			panel_1.setLayout(new MigLayout("", "[74px,grow]", "[fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][]"));
+			panel_1.add(getBtnUcitajResenja(), "cell 0 0,growx");
+			panel_1.add(getBtnUcitajKandidata(), "cell 0 1,growx");
+			panel_1.add(getLabel_1(), "cell 0 2");
+			panel_1.add(getTextFieldIme(), "cell 0 3,growx");
+			panel_1.add(getLabel_2(), "cell 0 4");
+			panel_1.add(getTextFieldPrezime(), "cell 0 5,growx");
+			panel_1.add(getLabel_3(), "cell 0 6");
+			panel_1.add(getTextFieldMaticniBroj(), "cell 0 7,growx");
+			panel_1.add(getLabel_4(), "cell 0 8");
+			panel_1.add(getTextFieldBodoviIzSkole(), "cell 0 9,growx");
 		}
 		return panel_1;
 	}
@@ -131,64 +135,6 @@ public class PrijemniGUI extends JFrame {
 		}
 		return textAreaPitanja;
 	}
-	private JButton getBtnUcitaj() {
-		if (btnUcitaj == null) {
-			btnUcitaj = new JButton("Ucitaj resenja");
-		}
-		return btnUcitaj;
-	}
-	private JTextField getTxtIme() {
-		if (txtIme == null) {
-			txtIme = new JTextField();
-			txtIme.setColumns(10);
-		}
-		return txtIme;
-	}
-	private JLabel getLblIme() {
-		if (lblIme == null) {
-			lblIme = new JLabel("Ime");
-		}
-		return lblIme;
-	}
-	private JLabel getLblPrezime() {
-		if (lblPrezime == null) {
-			lblPrezime = new JLabel("Prezime");
-		}
-		return lblPrezime;
-	}
-	private JTextField getTextPrezime() {
-		if (textPrezime == null) {
-			textPrezime = new JTextField();
-			textPrezime.setColumns(10);
-		}
-		return textPrezime;
-	}
-	private JLabel getLblJmbg() {
-		if (lblJmbg == null) {
-			lblJmbg = new JLabel("JMBG");
-		}
-		return lblJmbg;
-	}
-	private JTextField getTxtJmbg() {
-		if (txtJmbg == null) {
-			txtJmbg = new JTextField();
-			txtJmbg.setColumns(10);
-		}
-		return txtJmbg;
-	}
-	private JLabel getLblBrojBodova() {
-		if (lblBrojBodova == null) {
-			lblBrojBodova = new JLabel("Bodovi iz skole");
-		}
-		return lblBrojBodova;
-	}
-	private JTextField getTextBodoviSS() {
-		if (textBodoviSS == null) {
-			textBodoviSS = new JTextField();
-			textBodoviSS.setColumns(10);
-		}
-		return textBodoviSS;
-	}
 	private JButton getBtnPocetak() {
 		if (btnPocetak == null) {
 			btnPocetak = new JButton("Idi na pocetak");
@@ -204,6 +150,7 @@ public class PrijemniGUI extends JFrame {
 	private JRadioButton getRdbtnA() {
 		if (rdbtnA == null) {
 			rdbtnA = new JRadioButton("A");
+			buttonGroup.add(rdbtnA);
 			rdbtnA.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					if(rdbtnA.isSelected()){
@@ -217,25 +164,97 @@ public class PrijemniGUI extends JFrame {
 	private JRadioButton getRdbtnB() {
 		if (rdbtnB == null) {
 			rdbtnB = new JRadioButton("B");
+			buttonGroup.add(rdbtnB);
 		}
 		return rdbtnB;
 	}
 	private JRadioButton getRdbtnC() {
 		if (rdbtnC == null) {
 			rdbtnC = new JRadioButton("C");
+			buttonGroup.add(rdbtnC);
 		}
 		return rdbtnC;
 	}
 	private JRadioButton getRdbtnD() {
 		if (rdbtnD == null) {
 			rdbtnD = new JRadioButton("D");
+			buttonGroup.add(rdbtnD);
 		}
 		return rdbtnD;
 	}
 	private JRadioButton getRdbtnN() {
 		if (rdbtnN == null) {
 			rdbtnN = new JRadioButton("N");
+			buttonGroup.add(rdbtnN);
 		}
 		return rdbtnN;
+	}
+	private JLabel getLabel_1() {
+		if (lblIme == null) {
+			lblIme = new JLabel("Ime");
+		}
+		return lblIme;
+	}
+	private JLabel getLabel_2() {
+		if (lblPrezime == null) {
+			lblPrezime = new JLabel("Prezime");
+		}
+		return lblPrezime;
+	}
+	private JLabel getLabel_3() {
+		if (lblMaticniBroj == null) {
+			lblMaticniBroj = new JLabel("Maticni broj");
+		}
+		return lblMaticniBroj;
+	}
+	private JLabel getLabel_4() {
+		if (lblBodoviIzSkole == null) {
+			lblBodoviIzSkole = new JLabel("Bodovi iz skole");
+		}
+		return lblBodoviIzSkole;
+	}
+	private JTextField getTextFieldIme() {
+		if (textFieldIme == null) {
+			textFieldIme = new JTextField();
+			textFieldIme.setEditable(false);
+			textFieldIme.setColumns(10);
+		}
+		return textFieldIme;
+	}
+	private JTextField getTextFieldPrezime() {
+		if (textFieldPrezime == null) {
+			textFieldPrezime = new JTextField();
+			textFieldPrezime.setEditable(false);
+			textFieldPrezime.setColumns(10);
+		}
+		return textFieldPrezime;
+	}
+	private JTextField getTextFieldMaticniBroj() {
+		if (textFieldMaticniBroj == null) {
+			textFieldMaticniBroj = new JTextField();
+			textFieldMaticniBroj.setEditable(false);
+			textFieldMaticniBroj.setColumns(10);
+		}
+		return textFieldMaticniBroj;
+	}
+	private JTextField getTextFieldBodoviIzSkole() {
+		if (textFieldBodoviIzSkole == null) {
+			textFieldBodoviIzSkole = new JTextField();
+			textFieldBodoviIzSkole.setEditable(false);
+			textFieldBodoviIzSkole.setColumns(10);
+		}
+		return textFieldBodoviIzSkole;
+	}
+	private JButton getBtnUcitajResenja() {
+		if (btnUcitajResenja == null) {
+			btnUcitajResenja = new JButton("Ucitaj resenja");
+		}
+		return btnUcitajResenja;
+	}
+	private JButton getBtnUcitajKandidata() {
+		if (btnUcitajKandidata == null) {
+			btnUcitajKandidata = new JButton("Ucitaj kandidata");
+		}
+		return btnUcitajKandidata;
 	}
 }
