@@ -268,7 +268,7 @@ public class GUIKontroler {
 			}
 			i++;
 			prijemni.getTextAreaPitanja().setText("Odgovor na " + (i + 1) + ". pitanje je?");
-			//buttonGroup.clearSelection();
+			prijemni.getButtonGroup().clearSelection();
 		} else {
 			if (prijemni.getRdbtnA().isSelected()) {
 				nizResenjaKandidata[i] = "A";

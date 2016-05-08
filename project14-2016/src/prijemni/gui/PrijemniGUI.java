@@ -387,4 +387,12 @@ public class PrijemniGUI extends JFrame {
 		}
 		return lblBodovi;
 	}
+
+	public ButtonGroup getButtonGroup() {
+		
+		return buttonGroup;
+	}
+	
+	
+	
 }
