@@ -1,8 +1,11 @@
 package prijemni.gui;
 
 import java.awt.EventQueue;
-import java.awt.HeadlessException;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 import prijemni.Kandidat;
@@ -12,6 +15,9 @@ public class GUIKontroler {
 	private static PrijemniGUI prijemni;
 	private static KandidatGUI kandidat;
 	private static Kandidat k;
+	static String[] nizResenja = new String[20];
+	static String[] nizResenjaKandidata = new String[20];
+	static int i = 0;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -112,5 +118,120 @@ public class GUIKontroler {
 		k.serijalizacija(k);
 	}
 	
+	
+	public static void pocniIzvrsenjeAplikacije(){
+		prijemni.getBtnPocetak().setVisible(false);
+		prijemni.getTextAreaPitanja().setText("Odgovor na 1. pitanje je?");
+		prijemni.getBtnSledeciOdgovor().setVisible(true);
+		prijemni.getRdbtnA().setVisible(true);
+		prijemni.getRdbtnB().setVisible(true);
+		prijemni.getRdbtnC().setVisible(true);
+		prijemni.getRdbtnD().setVisible(true);
+		prijemni.getRdbtnN().setVisible(true);
+	}
+	
+	
+	public static void sacuvajPodatke(){
+		prijemni.getBtnUcitajKandidata().setVisible(false);
+		prijemni.getBtnPocetak().setVisible(true);
+		prijemni.getBtnSacuvaj().setVisible(false);
 
+		i = 0;
+		for (int j = 0; j < 20; j++) {
+			if (nizResenjaKandidata[j] == "N") {
+				prijemni.bodovi += 0;
+			} else if (nizResenjaKandidata[j].equals(nizResenja[j])) {
+				prijemni.bodovi += 3;
+			} else {
+				prijemni.bodovi = prijemni.bodovi - 0.6;
+			}
+		}
+		prijemni.getTextAreaPitanja().setText("Pocnite unos sledeceg kandidata...");
+
+		GUIKontroler.unesi();
+
+		String poruka = "Ime: " + prijemni.getTextFieldIme().getText() + "\nPrezime: " + prijemni.getTextFieldPrezime().getText()
+				+ "\nBroj bodova na prijemnom: " + prijemni.bodovi;
+		JOptionPane.showMessageDialog(null, poruka, "Kandidat je unet uspesno", JOptionPane.OK_OPTION);
+		prijemni.getTextFieldBodoviIzSkole().setText(null);
+		prijemni.getTextFieldIme().setText(null);
+		prijemni.getTextFieldMaticniBroj().setText(null);
+		prijemni.getTextFieldPrezime().setText(null);
+		prijemni.bodovi = 0;
+	}
+	
+	
+	public static void ucitajResenja(){
+		try {
+			JFileChooser fc = new JFileChooser();
+			int opcija = fc.showOpenDialog(null);
+			prijemni.getTextAreaPitanja().setText("Ucitana su resenja sa lokacije: ");
+			if (opcija == JFileChooser.APPROVE_OPTION) {
+				File file = fc.getSelectedFile();
+				prijemni.getTextAreaPitanja().setText("Ucitana su resenja sa lokacije: " + file.getAbsolutePath());
+				prijemni.getBtnPocetak().setVisible(true);
+				BufferedReader br = new BufferedReader(new FileReader(file));
+				for (int i = 0; i < nizResenja.length; i++) {
+					nizResenja[i] = br.readLine();
+				}
+
+			}
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(prijemni.getContentPane(),
+					"Doslo je do greske prilikom ucitavanja resenja!", "Greska", JOptionPane.ERROR_MESSAGE);
+		} 
+
+	}
+	
+	
+	public static void idiNaSledecePitanje(){
+		if (i < 19) {
+			if (prijemni.getRdbtnA().isSelected()) {
+				nizResenjaKandidata[i] = "A";
+			} else if (prijemni.getRdbtnB().isSelected()) {
+				nizResenjaKandidata[i] = "B";
+			} else if (prijemni.getRdbtnC().isSelected()) {
+				nizResenjaKandidata[i] = "C";
+			} else if (prijemni.getRdbtnD().isSelected()) {
+				nizResenjaKandidata[i] = "D";
+			} else if (prijemni.getRdbtnN().isSelected()) {
+				nizResenjaKandidata[i] = "N";
+			} else {
+				JOptionPane.showMessageDialog(null, "Morate odabrati odgovor!", "Greska",
+						JOptionPane.OK_OPTION);
+				i--;
+			}
+			i++;
+			prijemni.getTextAreaPitanja().setText("Odgovor na " + (i + 1) + ". pitanje je?");
+			//buttonGroup.clearSelection();
+		} else {
+			if (prijemni.getRdbtnA().isSelected()) {
+				nizResenjaKandidata[i] = "A";
+			} else if (prijemni.getRdbtnB().isSelected()) {
+				nizResenjaKandidata[i] = "B";
+			} else if (prijemni.getRdbtnC().isSelected()) {
+				nizResenjaKandidata[i] = "C";
+			} else if (prijemni.getRdbtnD().isSelected()) {
+				nizResenjaKandidata[i] = "D";
+			} else if (prijemni.getRdbtnN().isSelected()) {
+				nizResenjaKandidata[i] = "N";
+			} else {
+				JOptionPane.showMessageDialog(null, "Morate odabrati odgovor!", "Greska",
+						JOptionPane.OK_OPTION);
+				i--;
+			}
+			prijemni.getBtnSledeciOdgovor().setVisible(false);
+			prijemni.getBtnUcitajKandidata().setVisible(true);
+			prijemni.getRdbtnA().setVisible(false);
+			prijemni.getRdbtnB().setVisible(false);
+			prijemni.getRdbtnC().setVisible(false);
+			prijemni.getRdbtnD().setVisible(false);
+			prijemni.getRdbtnN().setVisible(false);
+			prijemni.getTextAreaPitanja().setText("Uneti su svi odgovori, sad mozete da unesete kandidata!");
+
+		}
+	}
+	
+	
+	
 }

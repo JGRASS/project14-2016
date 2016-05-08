@@ -157,20 +157,13 @@ public class PrijemniGUI extends JFrame {
 		return textAreaPitanja;
 	}
 
-	private JButton getBtnPocetak() {
+	public JButton getBtnPocetak() {
 		if (btnPocetak == null) {
 			btnPocetak = new JButton("Kreni");
 			btnPocetak.setVisible(false);
 			btnPocetak.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					btnPocetak.setVisible(false);
-					textAreaPitanja.setText("Odgovor na 1. pitanje je?");
-					btnSledeciOdgovor.setVisible(true);
-					rdbtnA.setVisible(true);
-					rdbtnB.setVisible(true);
-					rdbtnC.setVisible(true);
-					rdbtnD.setVisible(true);
-					rdbtnN.setVisible(true);
+					GUIKontroler.pocniIzvrsenjeAplikacije();
 
 				}
 			});
@@ -186,46 +179,21 @@ public class PrijemniGUI extends JFrame {
 			btnSacuvaj.setVisible(false);
 			btnSacuvaj.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					btnUcitajKandidata.setVisible(false);
-					btnPocetak.setVisible(true);
-					btnSacuvaj.setVisible(false);
 
-					i = 0;
-					for (int j = 0; j < 20; j++) {
-						if (nizResenjaKandidata[j] == "N") {
-							bodovi += 0;
-						} else if (nizResenjaKandidata[j].equals(nizResenja[j])) {
-							bodovi += 3;
-						} else {
-							bodovi = bodovi - 0.6;
-						}
-					}
-					textAreaPitanja.setText("Pocnite unos sledeceg kandidata...");
-
-					GUIKontroler.unesi();
-
-					String poruka = "Ime: " + textFieldIme.getText() + "\nPrezime: " + textFieldPrezime.getText()
-							+ "\nBroj bodova na prijemnom: " + bodovi;
-					JOptionPane.showMessageDialog(null, poruka, "Kandidat je unet uspesno", JOptionPane.OK_OPTION);
-					textFieldBodoviIzSkole.setText(null);
-					textFieldIme.setText(null);
-					textFieldMaticniBroj.setText(null);
-					textFieldPrezime.setText(null);
-					bodovi = 0;
-
+					GUIKontroler.sacuvajPodatke();
 				}
 			});
 		}
 		return btnSacuvaj;
 	}
 
-	private JRadioButton getRdbtnA() {
+	public JRadioButton getRdbtnA() {
 		if (rdbtnA == null) {
 			rdbtnA = new JRadioButton("A");
 			rdbtnA.setVisible(false);
 			buttonGroup.add(rdbtnA);
 			rdbtnA.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
+				public void actionPerformed(ActionEvent e) {
 					if (rdbtnA.isSelected()) {
 
 					}
@@ -235,7 +203,7 @@ public class PrijemniGUI extends JFrame {
 		return rdbtnA;
 	}
 
-	private JRadioButton getRdbtnB() {
+	public JRadioButton getRdbtnB() {
 		if (rdbtnB == null) {
 			rdbtnB = new JRadioButton("B");
 			rdbtnB.setVisible(false);
@@ -244,7 +212,7 @@ public class PrijemniGUI extends JFrame {
 		return rdbtnB;
 	}
 
-	private JRadioButton getRdbtnC() {
+	public JRadioButton getRdbtnC() {
 		if (rdbtnC == null) {
 			rdbtnC = new JRadioButton("C");
 			rdbtnC.setVisible(false);
@@ -253,7 +221,7 @@ public class PrijemniGUI extends JFrame {
 		return rdbtnC;
 	}
 
-	private JRadioButton getRdbtnD() {
+	public JRadioButton getRdbtnD() {
 		if (rdbtnD == null) {
 			rdbtnD = new JRadioButton("D");
 			rdbtnD.setVisible(false);
@@ -262,7 +230,7 @@ public class PrijemniGUI extends JFrame {
 		return rdbtnD;
 	}
 
-	private JRadioButton getRdbtnN() {
+	public JRadioButton getRdbtnN() {
 		if (rdbtnN == null) {
 			rdbtnN = new JRadioButton("N");
 			rdbtnN.setVisible(false);
@@ -335,45 +303,22 @@ public class PrijemniGUI extends JFrame {
 		return textFieldBodoviIzSkole;
 	}
 
-	String[] nizResenja = new String[20];
+	
 
-	private JButton getBtnUcitajResenja() {
+	public JButton getBtnUcitajResenja() {
 		if (btnUcitajResenja == null) {
 			btnUcitajResenja = new JButton("Ucitaj resenja");
 			btnUcitajResenja.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-					try {
-						JFileChooser fc = new JFileChooser();
-						int opcija = fc.showOpenDialog(null);
-						textAreaPitanja.setText("Ucitana su resenja sa lokacije: ");
-						if (opcija == JFileChooser.APPROVE_OPTION) {
-							File file = fc.getSelectedFile();
-							textAreaPitanja.setText("Ucitana su resenja sa lokacije: " + file.getAbsolutePath());
-							btnPocetak.setVisible(true);
-							BufferedReader br = new BufferedReader(new FileReader(file));
-							for (int i = 0; i < nizResenja.length; i++) {
-								nizResenja[i] = br.readLine();
-							}
+				public void actionPerformed(ActionEvent e) {
 
-						}
-					} catch (HeadlessException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (FileNotFoundException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-
+					GUIKontroler.ucitajResenja();
 				}
 			});
 		}
 		return btnUcitajResenja;
 	}
 
-	private JButton getBtnUcitajKandidata() {
+	public JButton getBtnUcitajKandidata() {
 		if (btnUcitajKandidata == null) {
 			btnUcitajKandidata = new JButton("Ucitaj kandidata");
 			btnUcitajKandidata.setVisible(false);
@@ -386,60 +331,16 @@ public class PrijemniGUI extends JFrame {
 		return btnUcitajKandidata;
 	}
 
-	int i = 0;
-	String[] nizResenjaKandidata = new String[20];
+
 	private JLabel lblBodovi;
 
-	private JButton getBtnSledeciOdgovor() {
+	public JButton getBtnSledeciOdgovor() {
 		if (btnSledeciOdgovor == null) {
 			btnSledeciOdgovor = new JButton("Sledeci odgovor");
 			btnSledeciOdgovor.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					if (i < 19) {
-						if (rdbtnA.isSelected()) {
-							nizResenjaKandidata[i] = "A";
-						} else if (rdbtnB.isSelected()) {
-							nizResenjaKandidata[i] = "B";
-						} else if (rdbtnC.isSelected()) {
-							nizResenjaKandidata[i] = "C";
-						} else if (rdbtnD.isSelected()) {
-							nizResenjaKandidata[i] = "D";
-						} else if (rdbtnN.isSelected()) {
-							nizResenjaKandidata[i] = "N";
-						} else {
-							JOptionPane.showMessageDialog(null, "Morate odabrati odgovor!", "Greska",
-									JOptionPane.OK_OPTION);
-							i--;
-						}
-						i++;
-						textAreaPitanja.setText("Odgovor na " + (i + 1) + ". pitanje je?");
-						// buttonGroup.clearSelection();
-					} else {
-						if (rdbtnA.isSelected()) {
-							nizResenjaKandidata[i] = "A";
-						} else if (rdbtnB.isSelected()) {
-							nizResenjaKandidata[i] = "B";
-						} else if (rdbtnC.isSelected()) {
-							nizResenjaKandidata[i] = "C";
-						} else if (rdbtnD.isSelected()) {
-							nizResenjaKandidata[i] = "D";
-						} else if (rdbtnN.isSelected()) {
-							nizResenjaKandidata[i] = "N";
-						} else {
-							JOptionPane.showMessageDialog(null, "Morate odabrati odgovor!", "Greska",
-									JOptionPane.OK_OPTION);
-							i--;
-						}
-						btnSledeciOdgovor.setVisible(false);
-						btnUcitajKandidata.setVisible(true);
-						rdbtnA.setVisible(false);
-						rdbtnB.setVisible(false);
-						rdbtnC.setVisible(false);
-						rdbtnD.setVisible(false);
-						rdbtnN.setVisible(false);
-						textAreaPitanja.setText("Uneti su svi odgovori, sad mozete da unesete kandidata!");
 
-					}
+					GUIKontroler.idiNaSledecePitanje();
 				}
 			});
 			btnSledeciOdgovor.setVisible(false);
@@ -447,7 +348,7 @@ public class PrijemniGUI extends JFrame {
 		return btnSledeciOdgovor;
 	}
 
-	private JLabel getLblBodovi() {
+	public JLabel getLblBodovi() {
 		if (lblBodovi == null) {
 			lblBodovi = new JLabel("");
 			lblBodovi.setVisible(false);
