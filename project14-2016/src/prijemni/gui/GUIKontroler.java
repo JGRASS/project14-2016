@@ -10,13 +10,33 @@ import javax.swing.JOptionPane;
 
 import prijemni.Kandidat;
 
+/**
+ * Klasa sadrzi metode koje koriste forme KandidatGUI i PrijemniGUI
+ * @author ValeVale i Mladen Lukic
+ *
+ */
 public class GUIKontroler {
-
+	/**
+	 * promenljiva kojom se pristupa prozoru PrijemniGUI
+	 */
 	private static PrijemniGUI prijemni;
+	/**
+	 * promenljiva kojom se pristupa prozoru KandidatGUI
+	 */
 	private static KandidatGUI kandidat;
+	/**
+	 * Objekat klase Kandidat
+	 */
 	private static Kandidat k;
+	/**
+	 * niz Stringova koji predstavlja niz tacnih resenja zadataka iz fajla gde se nalaze
+	 */
 	static String[] nizResenja = new String[20];
+	/**
+	 * niz Stringova koji predstavlja resenja zadataka sa prijemnog kandidata
+	 */
 	static String[] nizResenjaKandidata = new String[20];
+	
 	static int i = 0;
 
 	public static void main(String[] args) {
@@ -35,13 +55,18 @@ public class GUIKontroler {
 			}
 		});
 	}
-
+	/**
+	 * Metoda koja prikazuje prozor Kandidat kad se klikne na dugme UcitajKandidata
+	 */
 	public static void prikaziProzorKandidat() {
 
 		kandidat.setVisible(true);
 		kandidat.setLocationRelativeTo(null);
 	}
-
+	/**
+	 * Metoda koja gasi celu aplikaciju pritiskom na dugme x 
+	 * Aplikacija ce se ugasiti samo kada se pritisne yes opcija na popup prozoru
+	 */
 	public static void ugasiAplikaciju() {
 		int opcija = JOptionPane.showConfirmDialog(prijemni.getContentPane(), "Da li zelite da zatvorite program?",
 				"Zatvaranje aplikacije", JOptionPane.YES_NO_OPTION);
@@ -51,7 +76,15 @@ public class GUIKontroler {
 		}
 
 	}
-
+	/**
+	 * Metoda koja se pokrece na dugme Sacuvaj u prozoru Kandidat; podaci uneti u formu Kandidat se prebacuju u odgovarajuca
+	 * polja u formi Prijemni 
+	 * @throws Java.lang.Exception ako nije uneto  broj bodova manji od 12 ili veci od 40
+	 * <ul> 
+	 * <li> 13 brojeva kao maticni broj</li>
+	 * <li> broj bodova manji od 12 ili veci od 40</li>
+	 * </ul>
+	 */
 	public static void sacuvajPodatkeOKandidatu() {
 
 		try {
