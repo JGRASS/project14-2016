@@ -137,9 +137,9 @@ public class GUIKontroler {
 
 		i = 0;
 		for (int j = 0; j < 20; j++) {
-			if (nizResenjaKandidata[j] == "N") {
+			if (nizResenjaKandidata[j].equals("N")) {
 				prijemni.bodovi += 0;
-			} else if (nizResenjaKandidata[j].equals(nizResenja[j])) {
+			} else if (nizResenjaKandidata[j].equalsIgnoreCase(nizResenja[j])) {
 				prijemni.bodovi += 3;
 			} else {
 				prijemni.bodovi = prijemni.bodovi - 0.6;
@@ -164,20 +164,30 @@ public class GUIKontroler {
 		try {
 			JFileChooser fc = new JFileChooser();
 			int opcija = fc.showOpenDialog(null);
-			prijemni.getTextAreaPitanja().setText("Ucitana su resenja sa lokacije: ");
 			if (opcija == JFileChooser.APPROVE_OPTION) {
 				File file = fc.getSelectedFile();
-				prijemni.getTextAreaPitanja().setText("Ucitana su resenja sa lokacije: " + file.getAbsolutePath());
-				prijemni.getBtnPocetak().setVisible(true);
 				BufferedReader br = new BufferedReader(new FileReader(file));
 				for (int i = 0; i < nizResenja.length; i++) {
 					nizResenja[i] = br.readLine();
+				}
+				boolean provera = false;
+				for (int i = 0; i < nizResenja.length; i++) {
+					if(!nizResenja[i].toUpperCase().startsWith("A") && !nizResenja[i].toUpperCase().startsWith("B") && !nizResenja[i].toUpperCase().startsWith("C") && !nizResenja[i].toUpperCase().startsWith("D")){
+						provera=true;
+						prijemni.getTextAreaPitanja().setText("Resenja na lokaciji: " + file.getAbsolutePath()+ " \nnisu validna, pokusajte ponovo!");
+						break;
+					}
+				}
+				if(!provera){
+					prijemni.getBtnPocetak().setVisible(true);
+					prijemni.getTextAreaPitanja().setText("Ucitana su resenja sa lokacije: " + file.getAbsolutePath());
 				}
 
 			}
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(prijemni.getContentPane(),
 					"Doslo je do greske prilikom ucitavanja resenja!", "Greska", JOptionPane.ERROR_MESSAGE);
+			prijemni.getTextAreaPitanja().setText("Resenja nisu validna, pokusajte ponovo!");
 		} 
 
 	}
