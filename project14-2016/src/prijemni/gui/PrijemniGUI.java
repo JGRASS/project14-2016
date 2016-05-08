@@ -156,7 +156,12 @@ public class PrijemniGUI extends JFrame {
 		}
 		return textAreaPitanja;
 	}
-
+	
+	/**
+	 * @author Mladen Lukic
+	 * Ovo dugme pokrece listu sa pitanjima
+	 * @return
+	 */
 	public JButton getBtnPocetak() {
 		if (btnPocetak == null) {
 			btnPocetak = new JButton("Kreni");
@@ -172,7 +177,12 @@ public class PrijemniGUI extends JFrame {
 	}
 
 	double bodovi = 0;
-
+	
+	/**
+	 * @author Mladen Lukic
+	 * Ovo dugme racuna ukupan broj bodova i serijalizuje podatke u tekstualni fajl koji korisnik odabere
+	 * @return
+	 */
 	public JButton getBtnSacuvaj() {
 		if (btnSacuvaj == null) {
 			btnSacuvaj = new JButton("Sacuvaj");
@@ -186,7 +196,12 @@ public class PrijemniGUI extends JFrame {
 		}
 		return btnSacuvaj;
 	}
-
+	
+	/**
+	 * @author Mladen Lukic
+	 * Ukoliko se selektuje ovaj RadioButton, znaci da je kandidat na postavljeno pitanje odgovorio pod A
+	 * @return
+	 */
 	public JRadioButton getRdbtnA() {
 		if (rdbtnA == null) {
 			rdbtnA = new JRadioButton("A");
@@ -202,7 +217,12 @@ public class PrijemniGUI extends JFrame {
 		}
 		return rdbtnA;
 	}
-
+	
+	/**
+	 * @author Mladen Lukic
+	 * Ukoliko se selektuje ovaj RadioButton, znaci da je kandidat na postavljeno pitanje odgovorio pod B
+	 * @return
+	 */
 	public JRadioButton getRdbtnB() {
 		if (rdbtnB == null) {
 			rdbtnB = new JRadioButton("B");
@@ -211,7 +231,12 @@ public class PrijemniGUI extends JFrame {
 		}
 		return rdbtnB;
 	}
-
+	
+	/**
+	 * @author Mladen Lukic
+	 * Ukoliko se selektuje ovaj RadioButton, znaci da je kandidat na postavljeno pitanje odgovorio pod C
+	 * @return
+	 */
 	public JRadioButton getRdbtnC() {
 		if (rdbtnC == null) {
 			rdbtnC = new JRadioButton("C");
@@ -220,7 +245,12 @@ public class PrijemniGUI extends JFrame {
 		}
 		return rdbtnC;
 	}
-
+	
+	/**
+	 * @author Mladen Lukic
+	 * Ukoliko se selektuje ovaj RadioButton, znaci da je kandidat na postavljeno pitanje odgovorio pod D
+	 * @return
+	 */
 	public JRadioButton getRdbtnD() {
 		if (rdbtnD == null) {
 			rdbtnD = new JRadioButton("D");
@@ -229,7 +259,12 @@ public class PrijemniGUI extends JFrame {
 		}
 		return rdbtnD;
 	}
-
+	
+	/**
+	 * @author Mladen Lukic
+	 * Ukoliko se selektuje ovaj RadioButton, znaci da je kandidat na postavljeno pitanje odgovorio pod N-ne znam
+	 * @return
+	 */
 	public JRadioButton getRdbtnN() {
 		if (rdbtnN == null) {
 			rdbtnN = new JRadioButton("N");
@@ -304,7 +339,12 @@ public class PrijemniGUI extends JFrame {
 	}
 
 	
-
+	/**
+	 * @author Mladen Lukic
+	 * Ovo dugme je na pocetku jedino koje se moze kliknuti, klikom na njega korisnik dobija mogucnost da odabere
+	 * tekstualni fajl sa resenjima, ukoliko je fajl validan, moze se ucitati i nastaviti sa radom aplikacije
+	 * @return
+	 */
 	public JButton getBtnUcitajResenja() {
 		if (btnUcitajResenja == null) {
 			btnUcitajResenja = new JButton("Ucitaj resenja");
@@ -317,7 +357,12 @@ public class PrijemniGUI extends JFrame {
 		}
 		return btnUcitajResenja;
 	}
-
+	
+	/**
+	 * @author Mladen Lukic
+	 * Ovo dugme otvara formu KandidatGUI u kom se unosi kandidat koji je radio dati prijemni 
+	 * @return
+	 */
 	public JButton getBtnUcitajKandidata() {
 		if (btnUcitajKandidata == null) {
 			btnUcitajKandidata = new JButton("Ucitaj kandidata");
@@ -333,7 +378,11 @@ public class PrijemniGUI extends JFrame {
 
 
 	private JLabel lblBodovi;
-
+	/**
+	 * @author Mladen Lukic
+	 * Klikom na ovo dugme unosi se odgovor na ponudjeno pitanje(sa RadioButton-a) i prelazi se na sledece pitanje
+	 * @return
+	 */
 	public JButton getBtnSledeciOdgovor() {
 		if (btnSledeciOdgovor == null) {
 			btnSledeciOdgovor = new JButton("Sledeci odgovor");

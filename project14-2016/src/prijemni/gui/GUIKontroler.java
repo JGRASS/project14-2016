@@ -96,12 +96,13 @@ public class GUIKontroler {
 
 			String maticniBroj;
 			maticniBroj = kandidat.getTextFieldMaticniBroj().getText();
+			long maticniBroj1 = Long.parseLong(maticniBroj);
 
 			String bodoviIzSkole;
 			bodoviIzSkole = kandidat.getTextFieldBodovi().getText();
 			Double bodovi = Double.parseDouble(bodoviIzSkole);
 
-			if (maticniBroj.length() == 13 && bodovi >= 12 && bodovi <= 40) {
+			if (maticniBroj.length() == 13 && bodovi >= 12 && bodovi <= 40 && maticniBroj1>0) {
 				prijemni.getTextFieldPrezime().setText(prezime);
 				prijemni.getTextFieldMaticniBroj().setText(maticniBroj);
 				prijemni.getTextFieldIme().setText(ime);
@@ -130,6 +131,7 @@ public class GUIKontroler {
 			}
 		} catch (Exception e) {
 			kandidat.getTextFieldBodovi().setText(null);
+			kandidat.getTextFieldMaticniBroj().setText(null);
 			JOptionPane.showMessageDialog(kandidat.getContentPane(),
 					"Doslo je do greske prilikom unosa; unesite ponovo!", "Greska", JOptionPane.ERROR_MESSAGE);
 		}
@@ -137,7 +139,11 @@ public class GUIKontroler {
 		
 		
 	}
-	
+	/**
+	 * @author Mladen Lukic
+	 * Ova metoda se pokrece klikom na dugme Sacuvaj, pomocu odgovarajucih tekstualnih polja formiraju se 
+	 * podaci za novog kandidata i nakon toga njegovi podaci se serijalizuju
+	 */
 	public static void unesi(){
 		
 		k = new Kandidat();
@@ -150,7 +156,11 @@ public class GUIKontroler {
 		k.serijalizacija(k);
 	}
 	
-	
+	/**
+	 * @author Mladen Lukic
+	 * Ova metoda se pokrece klikom na dugme Kreni, to dugme se gubi, dobija se dugme Sledece pitanje i dobijaju se 
+	 * Radio Button-i pomocu kojih krece unosenje odgovora kandidata
+	 */
 	public static void pocniIzvrsenjeAplikacije(){
 		prijemni.getBtnPocetak().setVisible(false);
 		prijemni.getTextAreaPitanja().setText("Odgovor na 1. pitanje je?");
@@ -162,7 +172,12 @@ public class GUIKontroler {
 		prijemni.getRdbtnN().setVisible(true);
 	}
 	
-	
+	/**
+	 * @author Mladen Lukic
+	 * Ova metoda se poziva klikom na dugme Sacuvaj, ona proverava dva niza nizResenja i nizResenjaKandidata i na osnovu
+	 * poklapanja formira konacan broj bodova na prijemnom za odredjenog kandidata, i nakon toga serijalizuje njegove podatke
+	 * u tekstualni fajl koji korisnik odabere
+	 */
 	public static void sacuvajPodatke(){
 		prijemni.getBtnUcitajKandidata().setVisible(false);
 		prijemni.getBtnPocetak().setVisible(true);
@@ -192,7 +207,10 @@ public class GUIKontroler {
 		prijemni.bodovi = 0;
 	}
 	
-	
+	/**
+	 * @author Mladen Lukic
+	 * Ova metoda se poziva kada se klikne dugme Ucitaj resenja, ucitava tacna resenja prijemnog ispita iz tekstualnog fajla koji korisnik odabere u niz nizResenja
+	 */
 	public static void ucitajResenja(){
 		try {
 			JFileChooser fc = new JFileChooser();
@@ -215,7 +233,7 @@ public class GUIKontroler {
 					prijemni.getBtnPocetak().setVisible(true);
 					prijemni.getTextAreaPitanja().setText("Ucitana su resenja sa lokacije: " + file.getAbsolutePath());
 				}
-
+				br.close();
 			}
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(prijemni.getContentPane(),
@@ -225,7 +243,12 @@ public class GUIKontroler {
 
 	}
 	
-	
+	/**
+	 * @author Mladen Lukic
+	 * Metoda se pokrece klikom na dugme Sledece pitanje, ona proverava koji od Radio Button-a je selektovan
+	 * i na osnovu toga puni nizResenjaKandidata sa njegovim resenjima, posle 20-og pitanja
+	 * dugme se gasi(setVisible(false)), a dobijamo novo dugme Ucitaj kandidata
+	 */
 	public static void idiNaSledecePitanje(){
 		if (i < 19) {
 			if (prijemni.getRdbtnA().isSelected()) {

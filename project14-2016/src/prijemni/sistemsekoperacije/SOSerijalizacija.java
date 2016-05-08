@@ -3,15 +3,20 @@ package prijemni.sistemsekoperacije;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 import prijemni.Kandidat;
 
 public class SOSerijalizacija {
-
+	/**
+	 * @author Mladen Lukic
+	 * Metoda prima kandidata sa njegovim brojem ostvarenih bodova i serijalizuje ga u tekstualni fajl koji korisnik odabere
+	 * @throws java.lang.Exception Baca gresku prilikom input/output operacija
+	 * @param k Kandidat dobijen iz GUI forme
+	 */
 	public static void izvrsi(Kandidat k){
 		
 		JFileChooser fc = new JFileChooser();
@@ -25,9 +30,9 @@ public class SOSerijalizacija {
 				pw.println(k.toString());
 				pw.close();
 				
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, "Doslo je do greske prilikom serijalizacije", "Greska", 
+						JOptionPane.OK_OPTION);
 			}
 	}
 	}
