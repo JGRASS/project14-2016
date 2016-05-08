@@ -11,7 +11,12 @@ import javax.swing.JOptionPane;
 import prijemni.Kandidat;
 
 public class SOSerijalizacija {
-
+	/**
+	 * @author Mladen Lukic
+	 * Metoda prima kandidata sa njegovim brojem ostvarenih bodova i serijalizuje ga u tekstualni fajl koji korisnik odabere
+	 * @throws java.lang.Exception Baca gresku prilikom input/output operacija
+	 * @param k Kandidat dobijen iz GUI forme
+	 */
 	public static void izvrsi(Kandidat k){
 		
 		JFileChooser fc = new JFileChooser();
