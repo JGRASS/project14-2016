@@ -1,13 +1,12 @@
 package prijemni.gui;
 
-import java.awt.EventQueue;
+
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import java.awt.Dimension;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -55,7 +54,10 @@ public class KandidatGUI extends JFrame {
 		}
 		return lblImeKandidata;
 	}
-
+	/**
+	 * Unosi se ime kandidata kao String
+	 * @return textFieldIme koje sadrzi ime kandidata
+	 */
 	public JTextField getTextFieldIme() {
 		if (textFieldIme == null) {
 			textFieldIme = new JTextField();
@@ -64,7 +66,7 @@ public class KandidatGUI extends JFrame {
 		}
 		return textFieldIme;
 	}
-
+	
 	private JLabel getLblPrezimeKandidata() {
 		if (lblPrezimeKandidata == null) {
 			lblPrezimeKandidata = new JLabel("Prezime:");
@@ -72,7 +74,10 @@ public class KandidatGUI extends JFrame {
 		}
 		return lblPrezimeKandidata;
 	}
-
+	/**
+	 * Unosise prezime kandidata kao String
+	 * @return textFieldPrezime koje sadrzi prezime kandidata
+	 */
 	public JTextField getTextFieldPrezime() {
 		if (textFieldPrezime == null) {
 			textFieldPrezime = new JTextField();
@@ -89,7 +94,10 @@ public class KandidatGUI extends JFrame {
 		}
 		return lblMaticniBroj;
 	}
-
+	/**
+	 * Unosi se maticni broj kandidata kao String koji mora biti duzine 13 
+	 * @return textFieldMaticniBroj koji sadrzi maticni broj kandidata
+	 */
 	public JTextField getTextFieldMaticniBroj() {
 		if (textFieldMaticniBroj == null) {
 			textFieldMaticniBroj = new JTextField();
@@ -106,7 +114,10 @@ public class KandidatGUI extends JFrame {
 		}
 		return lblBrojBodovaIz;
 	}
-
+	/**
+	 * Unosi se broj bodova iz skole kao String koji mora biti broj jer se parsuje posle
+	 * @return textFieldBodovi koji sadrzi broj bodova iz skole kandidata
+	 */
 	public JTextField getTextFieldBodovi() {
 		if (textFieldBodovi == null) {
 			textFieldBodovi = new JTextField();
@@ -115,7 +126,11 @@ public class KandidatGUI extends JFrame {
 		}
 		return textFieldBodovi;
 	}
-
+	/**
+	 * Klikom na dugme sacuvaj prebacuju se podaci uneti u formu KandidatGUI u odgovarajuca polja u formi
+	 * PrijemniGUI i brisu se polja u formi KandidatGUI nakon uspesnog prenosenja podataka
+	 * @return btnUcitajPodatke dugme koje pokrece ovu akciju
+	 */
 	private JButton getBtnUcitajPodatke() {
 		if (btnUcitajPodatke == null) {
 			btnUcitajPodatke = new JButton("Sacuvaj");

@@ -1,38 +1,21 @@
 package prijemni.gui;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import prijemni.Kandidat;
 import prijemni.gui.GUIKontroler;
 
 import javax.swing.JTextField;
-import java.awt.FlowLayout;
-import java.awt.HeadlessException;
-
-import javax.swing.JTextPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
-
 import java.awt.Dimension;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JRadioButton;
 import java.awt.event.ActionListener;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
