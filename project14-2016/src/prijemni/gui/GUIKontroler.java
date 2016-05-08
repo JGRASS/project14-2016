@@ -71,7 +71,6 @@ public class GUIKontroler {
 			if (maticniBroj.length() == 13 && bodovi >= 12 && bodovi <= 40) {
 				prijemni.getTextFieldPrezime().setText(prezime);
 				prijemni.getTextFieldMaticniBroj().setText(maticniBroj);
-				;
 				prijemni.getTextFieldIme().setText(ime);
 				prijemni.getTextFieldBodoviIzSkole().setText(bodoviIzSkole);
 
@@ -152,7 +151,7 @@ public class GUIKontroler {
 
 		String poruka = "Ime: " + prijemni.getTextFieldIme().getText() + "\nPrezime: " + prijemni.getTextFieldPrezime().getText()
 				+ "\nBroj bodova na prijemnom: " + prijemni.bodovi;
-		JOptionPane.showMessageDialog(null, poruka, "Kandidat je unet uspesno", JOptionPane.OK_OPTION);
+		JOptionPane.showMessageDialog(null, poruka, "Kandidat je uspesno unet", JOptionPane.PLAIN_MESSAGE);
 		prijemni.getTextFieldBodoviIzSkole().setText(null);
 		prijemni.getTextFieldIme().setText(null);
 		prijemni.getTextFieldMaticniBroj().setText(null);

@@ -60,7 +60,7 @@ public class Kandidat {
 
 	
 	public String toString() {
-		return "Ime: " + getIme() + " Prezime " + getPrezime() + " UKUPAN BROJ BODOVA: "
+		return "Ime: " + getIme() + " \t\tPrezime: " + getPrezime() + " \t\tUKUPAN BROJ BODOVA: "
 				+ (getBrojBodovaIzSkole() + getBrojBodovaNaPrijemnom());
 	}
 
